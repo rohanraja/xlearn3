@@ -1,0 +1,16 @@
+{
+  "DataListFile": "dataInfo.csv",
+  "Data": [
+    {
+      "Name": "filePath",
+      "Type": "Image"
+    },
+    {
+      "Name": "class",
+      "Type": "Categorical",
+      "NumClasses": "2"
+    }
+  ],
+  "X": ["filePath"],
+  "Y": ["class"]
+}
