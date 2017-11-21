@@ -6,4 +6,6 @@ class BaseParser:
 
     def GetSlice(self, st, end):
 
-        return []
+        allList = self.parse()
+
+        return allList[st:end]

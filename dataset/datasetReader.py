@@ -2,34 +2,7 @@ import json
 import csv
 import imagePathReader
 import categoricalParse
-
-class CSVReader:
-
-    csvLines = []
-    csvHeader = []
-
-    def __init__(self, csvPath):
-        self.loadCSV(csvPath)
-
-
-    def loadCSV(self, csvPath):
-        f = open(csvPath)
-        r = csv.reader(f)
-        self.csvHeader = r.next()
-        for row in r:
-            self.csvLines.append(row)
-        f.close()
-        self.Count = len(csvLines)
-
-    def getColumnWithName(self, colName):
-
-        assert colName in self.csvHeader
-        colIdx = self.csvHeader.index(colName)
-        outP = []
-
-        for line in self.csvLines:
-            outP.append(line[colIdx])
-        return outP
+from csvreader import CSVReader 
 
 
 parsersDict = {
@@ -70,9 +43,31 @@ class DataSetInfo:
         self.jsonData = json.load(open(fPath))
 
 
-    def getBatchGen(self, batchSize):
-        return None
+    def getXY(self, st, end):
+        x = []
+        y = []
+        for label in self.X:
+            x.append(self.columnsDict[label].GetSlice(st, end))
+        
+        for label in self.Y:
+            y.append(self.columnsDict[label].GetSlice(st, end))
 
-if __name__ == "__main__":
-    dsinfo = DataSetInfo("metaData.json")
+        return (x,y)
+
+
+    def getBatchGen(self, batchSize):
+        totBatches = self.Count / batchSize
+        lastExtra = self.Count % batchSize
+
+        end = 0
+
+        for i in xrange(totBatches):
+
+            st = i*batchSize
+            end = (i+1)*batchSize
+
+            yield self.getXY(st, end)
+
+        if lastExtra > 0:
+            yield self.getXY(end,end+lastExtra)
 
