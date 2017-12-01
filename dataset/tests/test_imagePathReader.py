@@ -1,10 +1,12 @@
 import unittest
 from xlearn3.dataset import imagePathReader
+import xlearn3
 
 class TestImagePathParser(unittest.TestCase):
     def test_parse(self):
 
-        parsr = imagePathReader.ImagePathParser(["tests/data/googlelogo_color_120x44dp.png"], {})
+        imgPath = "%s/%s" % (xlearn3.__path__[0], "testdata/dataset/googlelogo_color_120x44dp.png")
+        parsr = imagePathReader.ImagePathParser([imgPath], {})
         outp = parsr.parse()
         print outp.shape
         assert outp.shape[3] == 3

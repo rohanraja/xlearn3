@@ -26,9 +26,3 @@ class ImagePathParser(BaseParser):
         return self.outP
 
 
-
-if __name__ == "__main__":
-
-    parsr = ImagePathParser(["/Volumes/Fireice/Users/rraja/code/dataset/cat/googlelogo_color_120x44dp.png"], {})
-    outp = parsr.parse()
-    print outp.shape

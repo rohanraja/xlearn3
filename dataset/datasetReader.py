@@ -3,7 +3,7 @@ import csv
 import imagePathReader
 import categoricalParse
 from csvreader import CSVReader 
-
+import os
 
 parsersDict = {
         "Image": imagePathReader.ImagePathParser,
@@ -16,10 +16,12 @@ class DataSetInfo:
 
     columnsDict = {}
 
-    def __init__(self, jsonPath):
+    def __init__(self, datasetPath):
+        jsonPath = os.path.join(datasetPath, "metaData.json")
         self.readJson(jsonPath)
 
         csvPath = self.jsonData["DataListFile"]
+        csvPath = os.path.join(datasetPath, csvPath)
         self.csvReader = CSVReader(csvPath)
         self.Count = self.csvReader.Count
 

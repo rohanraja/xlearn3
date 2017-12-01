@@ -2,7 +2,7 @@ import unittest
 from xlearn3.dataset import datasetReader
 import xlearn3
 
-class TestDataSetInfo(unittest.TestCase):
+class TestMNIST(unittest.TestCase):
 
     doneSetup = False
 
@@ -10,7 +10,7 @@ class TestDataSetInfo(unittest.TestCase):
         if self.doneSetup == True:
             return
         self.doneSetup = True
-        jsonPath = "%s/%s" % (xlearn3.__path__[0], "testdata/dataset")
+        jsonPath = "%s/%s" % (xlearn3.__path__[0], "testdata/dataset/mnist_png")
         self.dsinfo = datasetReader.DataSetInfo(jsonPath)
 
     def test_json_loading(self):
@@ -19,17 +19,19 @@ class TestDataSetInfo(unittest.TestCase):
 
     def test_CSV_Loading_Count(self):
 
-        assert self.dsinfo.Count == 79
+        assert self.dsinfo.Count == 70000
 
     def test_getBatchGen(self):
 
         bgen = self.dsinfo.getBatchGen(10)
 
         x,y = bgen.next()
+        print x[0].shape
+        print y[0].shape
 
         assert len(y[0]) == 10 # TODO: implement your test here
 
-    def test_getBatchGenLastLen(self):
+    def Test_getBatchGenLastLen(self):
 
         batchSize = 10
         bgen = self.dsinfo.getBatchGen(batchSize)
