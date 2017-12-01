@@ -1,0 +1,2 @@
+installTestData:
+	unzip testdata.zip
