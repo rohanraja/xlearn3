@@ -1,12 +1,14 @@
 import unittest
 from xlearn3.model import modelInfoReader
 import xlearn3
+import tensorflow as tf
 
 class TestModelInfo(unittest.TestCase):
     pyPath = "testdata/model1"
     modelPath = "testdata/mnist_cnn"
 
     def test_model_info(self):
+        tf.reset_default_graph()
         modelPath = "%s/%s" % (xlearn3.__path__[0], self.modelPath)
         mI = modelInfoReader.ModelInfo(modelPath)
         assert mI.model.canTrain() == False

@@ -9,6 +9,7 @@ class TestMnistModel(unittest.TestCase):
 
 
     def initModel(self):
+        tf.reset_default_graph()
         np.random.seed(10)
         tf.set_random_seed(10)
         modelPath = "%s/%s" % (xlearn3.__path__[0], self.modelPath)
@@ -41,6 +42,8 @@ class TestMnistModel(unittest.TestCase):
             # print self.model.correct_prediction.eval(feedDict, session=sess)
             print self.model.pred.eval(feedDictPred, session=sess)
 
+        sess.close()
+        tf.reset_default_graph()
         assert loss < initLoss
 
 
