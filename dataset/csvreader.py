@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 
 class CSVReader:
 
@@ -16,6 +17,9 @@ class CSVReader:
             self.csvLines.append(row)
         f.close()
         self.Count = len(self.csvLines)
+
+    def randomize(self):
+        np.random.shuffle(self.csvLines)
 
     def getColumnWithName(self, colName):
 

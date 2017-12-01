@@ -23,6 +23,7 @@ class DataSetInfo:
         csvPath = self.jsonData["DataListFile"]
         csvPath = os.path.join(datasetPath, csvPath)
         self.csvReader = CSVReader(csvPath)
+        self.csvReader.randomize()
         self.Count = self.csvReader.Count
 
         self.findColumns()
