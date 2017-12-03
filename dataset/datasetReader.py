@@ -64,7 +64,7 @@ class DataSetInfo:
 
         end = 0
 
-        for i in xrange(totBatches):
+        for i in range(totBatches):
 
             st = i*batchSize
             end = (i+1)*batchSize

@@ -12,7 +12,7 @@ class BaseTensorflow:
             for batch in batchGen:
                 feedDict = self.processBatch(batch)
                 loss = self.loss.eval(feedDict, session=self.sess)
-                print "Loss at Step no. %d is %f" % (i,loss) 
+                print("Loss at Step no. %d is %f" % (i,loss)) 
                 self.optimizer.run(feedDict, session=self.sess)
 
 

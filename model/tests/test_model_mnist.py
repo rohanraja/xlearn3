@@ -32,7 +32,7 @@ class TestMnistModel(unittest.TestCase):
         if self.bgen == None:
             batchSize = 64
             self.bgen = self.dsinfo.getBatchGen(batchSize)
-        x,y = self.bgen.next()
+        x,y = next(self.bgen)
         self.x = x[0]
         self.y = y[0]
 
@@ -52,9 +52,9 @@ class TestMnistModel(unittest.TestCase):
             feedDict = {self.model.x: self.x, self.model.y: self.y, self.model.keep_prob: 1}
             feedDictPred = {self.model.x: self.x, self.model.keep_prob: 1}
             loss = self.model.loss.eval(feedDict, session=sess)
-            print "Loss at Step no. %d is %f" % (i,loss) 
+            print("Loss at Step no. %d is %f" % (i,loss)) 
             self.model.optimizer.run(feedDict, session=sess)
-            print "Accuracy: " , self.model.accuracy.eval(feedDict, session=sess)
+            print("Accuracy: " , self.model.accuracy.eval(feedDict, session=sess))
             # print self.model.correct_prediction.eval(feedDict, session=sess)
             # print self.model.pred.eval(feedDictPred, session=sess)
 

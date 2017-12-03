@@ -12,7 +12,7 @@ class CSVReader:
     def loadCSV(self, csvPath):
         f = open(csvPath)
         r = csv.reader(f)
-        self.csvHeader = r.next()
+        self.csvHeader = next(r)
         for row in r:
             self.csvLines.append(row)
         f.close()

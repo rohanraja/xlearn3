@@ -8,7 +8,7 @@ class TestImagePathParser(unittest.TestCase):
         imgPath = "%s/%s" % (xlearn3.__path__[0], "testdata/dataset/googlelogo_color_120x44dp.png")
         parsr = imagePathReader.ImagePathParser([imgPath], {})
         outp = parsr.parse()
-        print outp.shape
+        print(outp.shape)
         assert outp.shape[3] == 3
 
 

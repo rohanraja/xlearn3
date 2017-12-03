@@ -25,9 +25,9 @@ class TestMNIST(unittest.TestCase):
 
         bgen = self.dsinfo.getBatchGen(10)
 
-        x,y = bgen.next()
-        print x[0].shape
-        print y[0].shape
+        x,y = next(bgen)
+        print(x[0].shape)
+        print(y[0].shape)
 
         assert len(y[0]) == 10 # TODO: implement your test here
 

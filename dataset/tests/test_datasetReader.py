@@ -25,7 +25,7 @@ class TestDataSetInfo(unittest.TestCase):
 
         bgen = self.dsinfo.getBatchGen(10)
 
-        x,y = bgen.next()
+        x,y = next(bgen)
 
         assert len(y[0]) == 10 # TODO: implement your test here
 

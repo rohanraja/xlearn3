@@ -36,11 +36,11 @@ class TestMnistModel(unittest.TestCase):
 
         for i in range(10):
             loss = self.model.loss.eval(feedDict, session=sess)
-            print "Loss at Step no. %d is %f" % (i,loss) 
+            print("Loss at Step no. %d is %f" % (i,loss)) 
             self.model.optimizer.run(feedDict, session=sess)
-            print self.model.accuracy.eval(feedDict, session=sess)
+            print(self.model.accuracy.eval(feedDict, session=sess))
             # print self.model.correct_prediction.eval(feedDict, session=sess)
-            print self.model.pred.eval(feedDictPred, session=sess)
+            print(self.model.pred.eval(feedDictPred, session=sess))
 
         sess.close()
         tf.reset_default_graph()
