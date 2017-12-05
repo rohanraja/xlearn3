@@ -4,6 +4,8 @@ from xlearn3.dataset import datasetReader
 import xlearn3
 import tensorflow as tf
 import numpy as np
+from itertools import cycle
+
 
 class TestMnistModel(unittest.TestCase):
     modelPath = "testdata/mnist_cnn"
@@ -31,10 +33,11 @@ class TestMnistModel(unittest.TestCase):
 
         if self.bgen == None:
             batchSize = 64
-            self.bgen = self.dsinfo.getBatchGen(batchSize)
+            self.bgen = cycle(self.dsinfo.getBatchGen(batchSize))
         x,y = next(self.bgen)
         self.x = x[0]
         self.y = y[0]
+
 
     def test_training_mnist(self):
         self.initDataset()
@@ -43,13 +46,13 @@ class TestMnistModel(unittest.TestCase):
         tf.global_variables_initializer().run(session=sess)
         
         self.initBatch()
-        feedDict = {self.model.x: self.x, self.model.y: self.y, self.model.keep_prob: 1}
+        feedDict = {self.model.x: self.x, self.model.y: self.y, self.model.keep_prob: 0.1}
         initLoss = self.model.loss.eval(feedDict, session=sess)
         loss = 10000000
 
-        for i in range(10):
+        for i in range(3):
             self.initBatch()
-            feedDict = {self.model.x: self.x, self.model.y: self.y, self.model.keep_prob: 1}
+            feedDict = {self.model.x: self.x, self.model.y: self.y, self.model.keep_prob: 0.4}
             feedDictPred = {self.model.x: self.x, self.model.keep_prob: 1}
             loss = self.model.loss.eval(feedDict, session=sess)
             print("Loss at Step no. %d is %f" % (i,loss)) 

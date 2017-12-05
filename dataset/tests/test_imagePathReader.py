@@ -9,7 +9,7 @@ class TestImagePathParser(unittest.TestCase):
         parsr = imagePathReader.ImagePathParser([imgPath], {})
         outp = parsr.parse()
         print(outp.shape)
-        assert outp.shape[3] == 3
+        assert outp.shape[3] == 1
 
 
 if __name__ == '__main__':

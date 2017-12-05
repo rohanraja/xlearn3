@@ -9,7 +9,8 @@ class ImagePathParser(BaseParser):
     outP = []
 
     def readImage(self, imgFile):
-        image = cv2.imread(imgFile)
+        image = cv2.imread(imgFile, 0)
+        image = image.reshape( image.shape + (1,) )
         return image
 
     def parse(self):

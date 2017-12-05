@@ -7,6 +7,7 @@ class CSVReader:
         self.csvLines = []
         self.csvHeader = []
         self.loadCSV(csvPath)
+        np.random.seed(20)
 
 
     def loadCSV(self, csvPath):
